@@ -1,0 +1,206 @@
+{
+    "auto-aliasing": {
+        "resources": {
+            "sonarqube_alm_azure": {
+                "current": "sonarqube:index/almAzure:AlmAzure",
+                "majorVersion": 1
+            },
+            "sonarqube_alm_github": {
+                "current": "sonarqube:index/almGithub:AlmGithub",
+                "majorVersion": 1
+            },
+            "sonarqube_alm_gitlab": {
+                "current": "sonarqube:index/almGitlab:AlmGitlab",
+                "majorVersion": 1
+            },
+            "sonarqube_azure_binding": {
+                "current": "sonarqube:index/azureBinding:AzureBinding",
+                "majorVersion": 1
+            },
+            "sonarqube_github_binding": {
+                "current": "sonarqube:index/githubBinding:GithubBinding",
+                "majorVersion": 1
+            },
+            "sonarqube_gitlab_binding": {
+                "current": "sonarqube:index/gitlabBinding:GitlabBinding",
+                "majorVersion": 1
+            },
+            "sonarqube_group": {
+                "current": "sonarqube:index/group:Group",
+                "majorVersion": 1
+            },
+            "sonarqube_group_member": {
+                "current": "sonarqube:index/groupMember:GroupMember",
+                "majorVersion": 1
+            },
+            "sonarqube_new_code_periods": {
+                "current": "sonarqube:index/newCodePeriods:NewCodePeriods",
+                "majorVersion": 1
+            },
+            "sonarqube_permission_template": {
+                "current": "sonarqube:index/permissionTemplate:PermissionTemplate",
+                "majorVersion": 1
+            },
+            "sonarqube_permissions": {
+                "current": "sonarqube:index/permissions:Permissions",
+                "majorVersion": 1,
+                "fields": {
+                    "permissions": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "sonarqube_plugin": {
+                "current": "sonarqube:index/plugin:Plugin",
+                "majorVersion": 1
+            },
+            "sonarqube_portfolio": {
+                "current": "sonarqube:index/portfolio:Portfolio",
+                "majorVersion": 1,
+                "fields": {
+                    "selected_projects": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "selected_branches": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    },
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "sonarqube_project": {
+                "current": "sonarqube:index/project:Project",
+                "majorVersion": 1,
+                "fields": {
+                    "setting": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "field_values": {
+                                    "maxItemsOne": false
+                                },
+                                "values": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    },
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "sonarqube_project_main_branch": {
+                "current": "sonarqube:index/projectMainBranch:ProjectMainBranch",
+                "majorVersion": 1
+            },
+            "sonarqube_qualitygate": {
+                "current": "sonarqube:index/qualitygate:Qualitygate",
+                "majorVersion": 1,
+                "fields": {
+                    "condition": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "sonarqube_qualitygate_project_association": {
+                "current": "sonarqube:index/qualitygateProjectAssociation:QualitygateProjectAssociation",
+                "majorVersion": 1
+            },
+            "sonarqube_qualitygate_usergroup_association": {
+                "current": "sonarqube:index/qualitygateUsergroupAssociation:QualitygateUsergroupAssociation",
+                "majorVersion": 1
+            },
+            "sonarqube_qualityprofile": {
+                "current": "sonarqube:index/qualityprofile:Qualityprofile",
+                "majorVersion": 1
+            },
+            "sonarqube_qualityprofile_activate_rule": {
+                "current": "sonarqube:index/qualityprofileActivateRule:QualityprofileActivateRule",
+                "majorVersion": 1
+            },
+            "sonarqube_qualityprofile_project_association": {
+                "current": "sonarqube:index/qualityprofileProjectAssociation:QualityprofileProjectAssociation",
+                "majorVersion": 1
+            },
+            "sonarqube_rule": {
+                "current": "sonarqube:index/rule:Rule",
+                "majorVersion": 1
+            },
+            "sonarqube_setting": {
+                "current": "sonarqube:index/setting:Setting",
+                "majorVersion": 1,
+                "fields": {
+                    "field_values": {
+                        "maxItemsOne": false
+                    },
+                    "values": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "sonarqube_user": {
+                "current": "sonarqube:index/user:User",
+                "majorVersion": 1
+            },
+            "sonarqube_user_external_identity": {
+                "current": "sonarqube:index/userExternalIdentity:UserExternalIdentity",
+                "majorVersion": 1
+            },
+            "sonarqube_user_token": {
+                "current": "sonarqube:index/userToken:UserToken",
+                "majorVersion": 1
+            },
+            "sonarqube_webhook": {
+                "current": "sonarqube:index/webhook:Webhook",
+                "majorVersion": 1
+            }
+        },
+        "datasources": {
+            "sonarqube_group": {
+                "current": "sonarqube:index/getGroup:getGroup",
+                "majorVersion": 1
+            },
+            "sonarqube_portfolio": {
+                "current": "sonarqube:index/getPortfolio:getPortfolio",
+                "majorVersion": 1,
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "sonarqube_project": {
+                "current": "sonarqube:index/getProject:getProject",
+                "majorVersion": 1
+            },
+            "sonarqube_qualitygate": {
+                "current": "sonarqube:index/getQualitygate:getQualitygate",
+                "majorVersion": 1,
+                "fields": {
+                    "condition": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "sonarqube_qualityprofile": {
+                "current": "sonarqube:index/getQualityprofile:getQualityprofile",
+                "majorVersion": 1
+            },
+            "sonarqube_rule": {
+                "current": "sonarqube:index/getRule:getRule",
+                "majorVersion": 1
+            },
+            "sonarqube_user": {
+                "current": "sonarqube:index/getUser:getUser",
+                "majorVersion": 1
+            }
+        }
+    },
+    "auto-settings": {}
+}
