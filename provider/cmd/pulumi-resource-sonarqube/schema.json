@@ -1,0 +1,2766 @@
+{
+    "name": "sonarqube",
+    "displayName": "sonarqube",
+    "description": "A Pulumi package for creating and managing xyz cloud resources.",
+    "keywords": [
+        "xyz",
+        "sonarqube",
+        "category/cloud"
+    ],
+    "homepage": "https://www.pulumi.com",
+    "license": "Apache-2.0",
+    "attribution": "This Pulumi package is based on the [`sonarqube` Terraform Provider](https://github.com/jdamata/terraform-provider-sonarqube).",
+    "repository": "https://github.com/pulumi/pulumi-xyz",
+    "publisher": "Covalto",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
+    "language": {
+        "csharp": {
+            "packageReferences": {
+                "Pulumi": "3.*"
+            },
+            "compatibility": "tfbridge20",
+            "respectSchemaVersion": true
+        },
+        "go": {
+            "importBasePath": "github.com/pulumi/pulumi-xyz/sdk/go/sonarqube",
+            "generateResourceContainerTypes": true,
+            "generateExtraInputTypes": true,
+            "respectSchemaVersion": true
+        },
+        "nodejs": {
+            "packageDescription": "A Pulumi package for creating and managing xyz cloud resources.",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/jdamata/terraform-provider-sonarqube)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-sonarqube` repo](https://github.com/pulumi/pulumi-xyz/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-sonarqube` repo](https://github.com/jdamata/terraform-provider-sonarqube/issues).",
+            "compatibility": "tfbridge20",
+            "disableUnionOutputTypes": true,
+            "respectSchemaVersion": true
+        },
+        "python": {
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/jdamata/terraform-provider-sonarqube)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-sonarqube` repo](https://github.com/pulumi/pulumi-xyz/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-sonarqube` repo](https://github.com/jdamata/terraform-provider-sonarqube/issues).",
+            "compatibility": "tfbridge20",
+            "respectSchemaVersion": true,
+            "pyproject": {
+                "enabled": true
+            }
+        }
+    },
+    "config": {
+        "variables": {
+            "anonymizeUserOnDelete": {
+                "type": "boolean",
+                "description": "Allows anonymizing users on destroy. Requires Sonarqube version \u003e= 9.7.\n"
+            },
+            "host": {
+                "type": "string"
+            },
+            "httpProxy": {
+                "type": "string"
+            },
+            "installedEdition": {
+                "type": "string"
+            },
+            "installedVersion": {
+                "type": "string"
+            },
+            "pass": {
+                "type": "string",
+                "secret": true
+            },
+            "tlsInsecureSkipVerify": {
+                "type": "boolean",
+                "description": "Allows ignoring insecure certificates when set to true. Defaults to false. Disabling TLS verification is dangerous and\nshould only be done for local testing.\n"
+            },
+            "token": {
+                "type": "string",
+                "secret": true
+            },
+            "user": {
+                "type": "string"
+            }
+        },
+        "defaults": [
+            "host"
+        ]
+    },
+    "types": {
+        "sonarqube:index/PortfolioSelectedProject:PortfolioSelectedProject": {
+            "properties": {
+                "projectKey": {
+                    "type": "string",
+                    "description": "The project key of the project to add to the portfolio\n"
+                },
+                "selectedBranches": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A set of branches for the project to add to the portfolio\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "projectKey"
+            ]
+        },
+        "sonarqube:index/ProjectSetting:ProjectSetting": {
+            "properties": {
+                "fieldValues": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    },
+                    "description": "Setting field values for the supplied key\n"
+                },
+                "key": {
+                    "type": "string",
+                    "description": "Setting key\n"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "Setting a value for the supplied key\n"
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Setting multi values for the supplied key\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "key"
+            ]
+        },
+        "sonarqube:index/QualitygateCondition:QualitygateCondition": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "metric": {
+                    "type": "string",
+                    "description": "Condition metric.\n\n  Only metrics of the following types are allowed:\n\n  - INT\n  - MILLISEC\n  - RATING\n  - WORK_DUR\n  - FLOAT\n  - PERCENT\n  - LEVEL.\n\n  The following metrics are forbidden:\n\n  - alert_status\n  - security_hotspots\n  - new_security_hotspots\n"
+                },
+                "op": {
+                    "type": "string",
+                    "description": "Condition operator. Possible values are: LT and GT\n"
+                },
+                "threshold": {
+                    "type": "string",
+                    "description": "Condition error threshold (For ratings: A=1, B=2, C=3, D=4)\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "metric",
+                "op",
+                "threshold"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "id",
+                        "metric",
+                        "op",
+                        "threshold"
+                    ]
+                }
+            }
+        },
+        "sonarqube:index/getQualitygateCondition:getQualitygateCondition": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "metric": {
+                    "type": "string"
+                },
+                "op": {
+                    "type": "string"
+                },
+                "threshold": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "id",
+                "metric",
+                "op",
+                "threshold"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        }
+    },
+    "provider": {
+        "description": "The provider type for the sonarqube package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "properties": {
+            "anonymizeUserOnDelete": {
+                "type": "boolean",
+                "description": "Allows anonymizing users on destroy. Requires Sonarqube version \u003e= 9.7.\n"
+            },
+            "host": {
+                "type": "string"
+            },
+            "httpProxy": {
+                "type": "string"
+            },
+            "installedEdition": {
+                "type": "string"
+            },
+            "installedVersion": {
+                "type": "string"
+            },
+            "pass": {
+                "type": "string",
+                "secret": true
+            },
+            "tlsInsecureSkipVerify": {
+                "type": "boolean",
+                "description": "Allows ignoring insecure certificates when set to true. Defaults to false. Disabling TLS verification is dangerous and\nshould only be done for local testing.\n"
+            },
+            "token": {
+                "type": "string",
+                "secret": true
+            },
+            "user": {
+                "type": "string"
+            }
+        },
+        "required": [
+            "host"
+        ],
+        "inputProperties": {
+            "anonymizeUserOnDelete": {
+                "type": "boolean",
+                "description": "Allows anonymizing users on destroy. Requires Sonarqube version \u003e= 9.7.\n"
+            },
+            "host": {
+                "type": "string"
+            },
+            "httpProxy": {
+                "type": "string"
+            },
+            "installedEdition": {
+                "type": "string"
+            },
+            "installedVersion": {
+                "type": "string"
+            },
+            "pass": {
+                "type": "string",
+                "secret": true
+            },
+            "tlsInsecureSkipVerify": {
+                "type": "boolean",
+                "description": "Allows ignoring insecure certificates when set to true. Defaults to false. Disabling TLS verification is dangerous and\nshould only be done for local testing.\n"
+            },
+            "token": {
+                "type": "string",
+                "secret": true
+            },
+            "user": {
+                "type": "string"
+            }
+        },
+        "requiredInputs": [
+            "host"
+        ]
+    },
+    "resources": {
+        "sonarqube:index/almAzure:AlmAzure": {
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "description": "Unique key of the Azure Devops instance setting\n"
+                },
+                "personalAccessToken": {
+                    "type": "string",
+                    "description": "Azure Devops personal access token\n",
+                    "secret": true
+                },
+                "url": {
+                    "type": "string",
+                    "description": "Azure API URL\n"
+                }
+            },
+            "required": [
+                "key",
+                "personalAccessToken",
+                "url"
+            ],
+            "inputProperties": {
+                "key": {
+                    "type": "string",
+                    "description": "Unique key of the Azure Devops instance setting\n",
+                    "willReplaceOnChanges": true
+                },
+                "personalAccessToken": {
+                    "type": "string",
+                    "description": "Azure Devops personal access token\n",
+                    "secret": true
+                },
+                "url": {
+                    "type": "string",
+                    "description": "Azure API URL\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "key",
+                "personalAccessToken",
+                "url"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AlmAzure resources.\n",
+                "properties": {
+                    "key": {
+                        "type": "string",
+                        "description": "Unique key of the Azure Devops instance setting\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "personalAccessToken": {
+                        "type": "string",
+                        "description": "Azure Devops personal access token\n",
+                        "secret": true
+                    },
+                    "url": {
+                        "type": "string",
+                        "description": "Azure API URL\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "sonarqube:index/almGithub:AlmGithub": {
+            "properties": {
+                "appId": {
+                    "type": "string",
+                    "description": "GitHub App ID. Maximum length: 80\n"
+                },
+                "clientId": {
+                    "type": "string",
+                    "description": "GitHub App Client ID. Maximum length: 80\n"
+                },
+                "clientSecret": {
+                    "type": "string",
+                    "description": "GitHub App Client Secret. Maximum length: 160\n"
+                },
+                "key": {
+                    "type": "string",
+                    "description": "Unique key of the GitHUb instance setting. Maximum length: 200\n"
+                },
+                "privateKey": {
+                    "type": "string",
+                    "description": "GitHub App private key. Maximum length: 2500\n"
+                },
+                "url": {
+                    "type": "string",
+                    "description": "GitHub API URL. Maximum length: 2000\n"
+                },
+                "webhookSecret": {
+                    "type": "string",
+                    "description": "GitHub App Webhook Secret. Maximum length: 160\n"
+                }
+            },
+            "required": [
+                "appId",
+                "clientId",
+                "clientSecret",
+                "key",
+                "privateKey",
+                "url"
+            ],
+            "inputProperties": {
+                "appId": {
+                    "type": "string",
+                    "description": "GitHub App ID. Maximum length: 80\n",
+                    "willReplaceOnChanges": true
+                },
+                "clientId": {
+                    "type": "string",
+                    "description": "GitHub App Client ID. Maximum length: 80\n",
+                    "willReplaceOnChanges": true
+                },
+                "clientSecret": {
+                    "type": "string",
+                    "description": "GitHub App Client Secret. Maximum length: 160\n",
+                    "willReplaceOnChanges": true
+                },
+                "key": {
+                    "type": "string",
+                    "description": "Unique key of the GitHUb instance setting. Maximum length: 200\n",
+                    "willReplaceOnChanges": true
+                },
+                "privateKey": {
+                    "type": "string",
+                    "description": "GitHub App private key. Maximum length: 2500\n",
+                    "willReplaceOnChanges": true
+                },
+                "url": {
+                    "type": "string",
+                    "description": "GitHub API URL. Maximum length: 2000\n",
+                    "willReplaceOnChanges": true
+                },
+                "webhookSecret": {
+                    "type": "string",
+                    "description": "GitHub App Webhook Secret. Maximum length: 160\n"
+                }
+            },
+            "requiredInputs": [
+                "appId",
+                "clientId",
+                "clientSecret",
+                "key",
+                "privateKey",
+                "url"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AlmGithub resources.\n",
+                "properties": {
+                    "appId": {
+                        "type": "string",
+                        "description": "GitHub App ID. Maximum length: 80\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "clientId": {
+                        "type": "string",
+                        "description": "GitHub App Client ID. Maximum length: 80\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "clientSecret": {
+                        "type": "string",
+                        "description": "GitHub App Client Secret. Maximum length: 160\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "key": {
+                        "type": "string",
+                        "description": "Unique key of the GitHUb instance setting. Maximum length: 200\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "privateKey": {
+                        "type": "string",
+                        "description": "GitHub App private key. Maximum length: 2500\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "url": {
+                        "type": "string",
+                        "description": "GitHub API URL. Maximum length: 2000\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "webhookSecret": {
+                        "type": "string",
+                        "description": "GitHub App Webhook Secret. Maximum length: 160\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "sonarqube:index/almGitlab:AlmGitlab": {
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "description": "Unique key of the GitLab instance setting. Maximum length: 200\n"
+                },
+                "personalAccessToken": {
+                    "type": "string",
+                    "description": "GitLab App personal access token with the `read_api` scope. See [this\ndoc](https://docs.sonarqube.org/latest/devops-platform-integration/gitlab-integration/#importing-your-gitlab-projects-into-sonarqube)\nfor more information. Maximum length: 2000\n",
+                    "secret": true
+                },
+                "url": {
+                    "type": "string",
+                    "description": "GitLab API URL. Maximum length: 2000\n"
+                }
+            },
+            "required": [
+                "key",
+                "personalAccessToken",
+                "url"
+            ],
+            "inputProperties": {
+                "key": {
+                    "type": "string",
+                    "description": "Unique key of the GitLab instance setting. Maximum length: 200\n",
+                    "willReplaceOnChanges": true
+                },
+                "personalAccessToken": {
+                    "type": "string",
+                    "description": "GitLab App personal access token with the `read_api` scope. See [this\ndoc](https://docs.sonarqube.org/latest/devops-platform-integration/gitlab-integration/#importing-your-gitlab-projects-into-sonarqube)\nfor more information. Maximum length: 2000\n",
+                    "secret": true
+                },
+                "url": {
+                    "type": "string",
+                    "description": "GitLab API URL. Maximum length: 2000\n"
+                }
+            },
+            "requiredInputs": [
+                "key",
+                "personalAccessToken",
+                "url"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AlmGitlab resources.\n",
+                "properties": {
+                    "key": {
+                        "type": "string",
+                        "description": "Unique key of the GitLab instance setting. Maximum length: 200\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "personalAccessToken": {
+                        "type": "string",
+                        "description": "GitLab App personal access token with the `read_api` scope. See [this\ndoc](https://docs.sonarqube.org/latest/devops-platform-integration/gitlab-integration/#importing-your-gitlab-projects-into-sonarqube)\nfor more information. Maximum length: 2000\n",
+                        "secret": true
+                    },
+                    "url": {
+                        "type": "string",
+                        "description": "GitLab API URL. Maximum length: 2000\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "sonarqube:index/azureBinding:AzureBinding": {
+            "properties": {
+                "almSetting": {
+                    "type": "string",
+                    "description": "Azure DevOps setting key\n"
+                },
+                "monorepo": {
+                    "type": "boolean",
+                    "description": "Is this project part of a monorepo\n"
+                },
+                "project": {
+                    "type": "string",
+                    "description": "SonarQube project key\n"
+                },
+                "projectName": {
+                    "type": "string",
+                    "description": "Azure project name\n"
+                },
+                "repositoryName": {
+                    "type": "string",
+                    "description": "Azure repository name\n"
+                }
+            },
+            "required": [
+                "almSetting",
+                "project",
+                "projectName",
+                "repositoryName"
+            ],
+            "inputProperties": {
+                "almSetting": {
+                    "type": "string",
+                    "description": "Azure DevOps setting key\n",
+                    "willReplaceOnChanges": true
+                },
+                "monorepo": {
+                    "type": "boolean",
+                    "description": "Is this project part of a monorepo\n",
+                    "willReplaceOnChanges": true
+                },
+                "project": {
+                    "type": "string",
+                    "description": "SonarQube project key\n",
+                    "willReplaceOnChanges": true
+                },
+                "projectName": {
+                    "type": "string",
+                    "description": "Azure project name\n",
+                    "willReplaceOnChanges": true
+                },
+                "repositoryName": {
+                    "type": "string",
+                    "description": "Azure repository name\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "almSetting",
+                "project",
+                "projectName",
+                "repositoryName"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AzureBinding resources.\n",
+                "properties": {
+                    "almSetting": {
+                        "type": "string",
+                        "description": "Azure DevOps setting key\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "monorepo": {
+                        "type": "boolean",
+                        "description": "Is this project part of a monorepo\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "project": {
+                        "type": "string",
+                        "description": "SonarQube project key\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "projectName": {
+                        "type": "string",
+                        "description": "Azure project name\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "repositoryName": {
+                        "type": "string",
+                        "description": "Azure repository name\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "sonarqube:index/githubBinding:GithubBinding": {
+            "properties": {
+                "almSetting": {
+                    "type": "string",
+                    "description": "GitHub ALM setting key\n"
+                },
+                "monorepo": {
+                    "type": "string",
+                    "description": "Is this project part of a monorepo. Default value: false\n"
+                },
+                "project": {
+                    "type": "string",
+                    "description": "Project key\n"
+                },
+                "repository": {
+                    "type": "string",
+                    "description": "The full name of your GitHub repository, including the organization, case-sensitive. Maximum length: 256\n"
+                },
+                "summaryCommentEnabled": {
+                    "type": "string",
+                    "description": "Enable/disable summary in PR discussion tab. Default value: true\n"
+                }
+            },
+            "required": [
+                "almSetting",
+                "project",
+                "repository"
+            ],
+            "inputProperties": {
+                "almSetting": {
+                    "type": "string",
+                    "description": "GitHub ALM setting key\n",
+                    "willReplaceOnChanges": true
+                },
+                "monorepo": {
+                    "type": "string",
+                    "description": "Is this project part of a monorepo. Default value: false\n",
+                    "willReplaceOnChanges": true
+                },
+                "project": {
+                    "type": "string",
+                    "description": "Project key\n",
+                    "willReplaceOnChanges": true
+                },
+                "repository": {
+                    "type": "string",
+                    "description": "The full name of your GitHub repository, including the organization, case-sensitive. Maximum length: 256\n",
+                    "willReplaceOnChanges": true
+                },
+                "summaryCommentEnabled": {
+                    "type": "string",
+                    "description": "Enable/disable summary in PR discussion tab. Default value: true\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "almSetting",
+                "project",
+                "repository"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering GithubBinding resources.\n",
+                "properties": {
+                    "almSetting": {
+                        "type": "string",
+                        "description": "GitHub ALM setting key\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "monorepo": {
+                        "type": "string",
+                        "description": "Is this project part of a monorepo. Default value: false\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "project": {
+                        "type": "string",
+                        "description": "Project key\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "repository": {
+                        "type": "string",
+                        "description": "The full name of your GitHub repository, including the organization, case-sensitive. Maximum length: 256\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "summaryCommentEnabled": {
+                        "type": "string",
+                        "description": "Enable/disable summary in PR discussion tab. Default value: true\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "sonarqube:index/gitlabBinding:GitlabBinding": {
+            "properties": {
+                "almSetting": {
+                    "type": "string",
+                    "description": "GitLab ALM setting key\n"
+                },
+                "monorepo": {
+                    "type": "string",
+                    "description": "Is this project part of a monorepo. Default value: false\n"
+                },
+                "project": {
+                    "type": "string",
+                    "description": "SonarQube project key. Changing this will force a new resource to be created\n"
+                },
+                "repository": {
+                    "type": "string",
+                    "description": "The GitLab project ID\n"
+                }
+            },
+            "required": [
+                "almSetting",
+                "project",
+                "repository"
+            ],
+            "inputProperties": {
+                "almSetting": {
+                    "type": "string",
+                    "description": "GitLab ALM setting key\n"
+                },
+                "monorepo": {
+                    "type": "string",
+                    "description": "Is this project part of a monorepo. Default value: false\n"
+                },
+                "project": {
+                    "type": "string",
+                    "description": "SonarQube project key. Changing this will force a new resource to be created\n",
+                    "willReplaceOnChanges": true
+                },
+                "repository": {
+                    "type": "string",
+                    "description": "The GitLab project ID\n"
+                }
+            },
+            "requiredInputs": [
+                "almSetting",
+                "project",
+                "repository"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering GitlabBinding resources.\n",
+                "properties": {
+                    "almSetting": {
+                        "type": "string",
+                        "description": "GitLab ALM setting key\n"
+                    },
+                    "monorepo": {
+                        "type": "string",
+                        "description": "Is this project part of a monorepo. Default value: false\n"
+                    },
+                    "project": {
+                        "type": "string",
+                        "description": "SonarQube project key. Changing this will force a new resource to be created\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "repository": {
+                        "type": "string",
+                        "description": "The GitLab project ID\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "sonarqube:index/group:Group": {
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "Description of the Group.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Group to create. Changing this forces a new resource to be created.\n"
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string",
+                    "description": "Description of the Group.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Group to create. Changing this forces a new resource to be created.\n"
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Group resources.\n",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "Description of the Group.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Group to create. Changing this forces a new resource to be created.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "sonarqube:index/groupMember:GroupMember": {
+            "properties": {
+                "loginName": {
+                    "type": "string",
+                    "description": "The `login_name` of the User to add as a member. Changing this forces a new resource to be created.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Group to add a member to. Changing this forces a new resource to be created.\n"
+                }
+            },
+            "required": [
+                "loginName",
+                "name"
+            ],
+            "inputProperties": {
+                "loginName": {
+                    "type": "string",
+                    "description": "The `login_name` of the User to add as a member. Changing this forces a new resource to be created.\n",
+                    "willReplaceOnChanges": true
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Group to add a member to. Changing this forces a new resource to be created.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "loginName"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering GroupMember resources.\n",
+                "properties": {
+                    "loginName": {
+                        "type": "string",
+                        "description": "The `login_name` of the User to add as a member. Changing this forces a new resource to be created.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Group to add a member to. Changing this forces a new resource to be created.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "sonarqube:index/newCodePeriods:NewCodePeriods": {
+            "properties": {
+                "branch": {
+                    "type": "string",
+                    "description": "The name of a branch of a project for which the new code period will be configured. Changing this will force a new\nresource to be created. Setting this also requires setting the 'project' argument.\n"
+                },
+                "project": {
+                    "type": "string",
+                    "description": "The key of a project for which the new code period will be configured. Changing this will force a new resource to be\ncreated.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The kind of new code period to use. Supported values are SPECIFIC_ANALYSIS, PREVIOUS_VERSION, NUMBER_OF_DAYS, or\nREFERENCE_BRANCH.\n"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "The desired value of the new code period. Varies based on the 'type'. For SPECIFIC_ANALYIS, the value must be the UUID\nof a previous analysis. For NUMBER_OF_DAYS it must be a numeric string. For REFERENCE_BRANCH it should be the name of\nbranch on the project. For PREVIOUS_VERSION it must **not** be set.\n"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "inputProperties": {
+                "branch": {
+                    "type": "string",
+                    "description": "The name of a branch of a project for which the new code period will be configured. Changing this will force a new\nresource to be created. Setting this also requires setting the 'project' argument.\n",
+                    "willReplaceOnChanges": true
+                },
+                "project": {
+                    "type": "string",
+                    "description": "The key of a project for which the new code period will be configured. Changing this will force a new resource to be\ncreated.\n",
+                    "willReplaceOnChanges": true
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The kind of new code period to use. Supported values are SPECIFIC_ANALYSIS, PREVIOUS_VERSION, NUMBER_OF_DAYS, or\nREFERENCE_BRANCH.\n"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "The desired value of the new code period. Varies based on the 'type'. For SPECIFIC_ANALYIS, the value must be the UUID\nof a previous analysis. For NUMBER_OF_DAYS it must be a numeric string. For REFERENCE_BRANCH it should be the name of\nbranch on the project. For PREVIOUS_VERSION it must **not** be set.\n"
+                }
+            },
+            "requiredInputs": [
+                "type"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering NewCodePeriods resources.\n",
+                "properties": {
+                    "branch": {
+                        "type": "string",
+                        "description": "The name of a branch of a project for which the new code period will be configured. Changing this will force a new\nresource to be created. Setting this also requires setting the 'project' argument.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "project": {
+                        "type": "string",
+                        "description": "The key of a project for which the new code period will be configured. Changing this will force a new resource to be\ncreated.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "The kind of new code period to use. Supported values are SPECIFIC_ANALYSIS, PREVIOUS_VERSION, NUMBER_OF_DAYS, or\nREFERENCE_BRANCH.\n"
+                    },
+                    "value": {
+                        "type": "string",
+                        "description": "The desired value of the new code period. Varies based on the 'type'. For SPECIFIC_ANALYIS, the value must be the UUID\nof a previous analysis. For NUMBER_OF_DAYS it must be a numeric string. For REFERENCE_BRANCH it should be the name of\nbranch on the project. For PREVIOUS_VERSION it must **not** be set.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "sonarqube:index/permissionTemplate:PermissionTemplate": {
+            "properties": {
+                "default": {
+                    "type": "boolean",
+                    "description": "Set the template as the default. This can only be set for one template.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description of the Template.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Permission template to create. Do not use names with `/`. If needed, use\n`replace(var.permission_template_name, \"/\", \"_\")`. Changing this forces a new resource to be created.\n"
+                },
+                "projectKeyPattern": {
+                    "type": "string",
+                    "description": "The project key pattern. Must be a valid Java regular expression.\n"
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "inputProperties": {
+                "default": {
+                    "type": "boolean",
+                    "description": "Set the template as the default. This can only be set for one template.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description of the Template.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Permission template to create. Do not use names with `/`. If needed, use\n`replace(var.permission_template_name, \"/\", \"_\")`. Changing this forces a new resource to be created.\n",
+                    "willReplaceOnChanges": true
+                },
+                "projectKeyPattern": {
+                    "type": "string",
+                    "description": "The project key pattern. Must be a valid Java regular expression.\n"
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering PermissionTemplate resources.\n",
+                "properties": {
+                    "default": {
+                        "type": "boolean",
+                        "description": "Set the template as the default. This can only be set for one template.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Description of the Template.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Permission template to create. Do not use names with `/`. If needed, use\n`replace(var.permission_template_name, \"/\", \"_\")`. Changing this forces a new resource to be created.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "projectKeyPattern": {
+                        "type": "string",
+                        "description": "The project key pattern. Must be a valid Java regular expression.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "sonarqube:index/permissions:Permissions": {
+            "properties": {
+                "groupName": {
+                    "type": "string",
+                    "description": "The name of the Group that should get the specified permissions. Changing this forces a new resource to be created.\nCannot be used with `login_name`\n"
+                },
+                "loginName": {
+                    "type": "string",
+                    "description": "The name of the user that should get the specified permissions. Changing this forces a new resource to be created.\nCannot be used with `group_name`.\n"
+                },
+                "permissions": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of permissions that should be applied. Changing this forces a new resource to be created. Possible values are:\n`admin`, `codeviewer`, `issueadmin`, `securityhotspotadmin`, `scan`, `user`.\n"
+                },
+                "projectKey": {
+                    "type": "string",
+                    "description": "Specify if you want to apply project level permissions. Changing this forces a new resource to be created. Cannot be\nused with `template_id \u0026 template_name`\n"
+                },
+                "templateId": {
+                    "type": "string",
+                    "description": "Specify if you want to apply the permissions to a permission template. Changing this forces a new resource to be\ncreated. Cannot be used with `project_key \u0026 template_name`\n"
+                },
+                "templateName": {
+                    "type": "string",
+                    "description": "Specify if you want to apply the permissions to a permission template. Changing this forces a new resource to be\ncreated. Cannot be used with `project_key \u0026 template_id`\n"
+                }
+            },
+            "required": [
+                "permissions"
+            ],
+            "inputProperties": {
+                "groupName": {
+                    "type": "string",
+                    "description": "The name of the Group that should get the specified permissions. Changing this forces a new resource to be created.\nCannot be used with `login_name`\n",
+                    "willReplaceOnChanges": true
+                },
+                "loginName": {
+                    "type": "string",
+                    "description": "The name of the user that should get the specified permissions. Changing this forces a new resource to be created.\nCannot be used with `group_name`.\n",
+                    "willReplaceOnChanges": true
+                },
+                "permissions": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of permissions that should be applied. Changing this forces a new resource to be created. Possible values are:\n`admin`, `codeviewer`, `issueadmin`, `securityhotspotadmin`, `scan`, `user`.\n",
+                    "willReplaceOnChanges": true
+                },
+                "projectKey": {
+                    "type": "string",
+                    "description": "Specify if you want to apply project level permissions. Changing this forces a new resource to be created. Cannot be\nused with `template_id \u0026 template_name`\n",
+                    "willReplaceOnChanges": true
+                },
+                "templateId": {
+                    "type": "string",
+                    "description": "Specify if you want to apply the permissions to a permission template. Changing this forces a new resource to be\ncreated. Cannot be used with `project_key \u0026 template_name`\n",
+                    "willReplaceOnChanges": true
+                },
+                "templateName": {
+                    "type": "string",
+                    "description": "Specify if you want to apply the permissions to a permission template. Changing this forces a new resource to be\ncreated. Cannot be used with `project_key \u0026 template_id`\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "permissions"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Permissions resources.\n",
+                "properties": {
+                    "groupName": {
+                        "type": "string",
+                        "description": "The name of the Group that should get the specified permissions. Changing this forces a new resource to be created.\nCannot be used with `login_name`\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "loginName": {
+                        "type": "string",
+                        "description": "The name of the user that should get the specified permissions. Changing this forces a new resource to be created.\nCannot be used with `group_name`.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "permissions": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of permissions that should be applied. Changing this forces a new resource to be created. Possible values are:\n`admin`, `codeviewer`, `issueadmin`, `securityhotspotadmin`, `scan`, `user`.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "projectKey": {
+                        "type": "string",
+                        "description": "Specify if you want to apply project level permissions. Changing this forces a new resource to be created. Cannot be\nused with `template_id \u0026 template_name`\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "templateId": {
+                        "type": "string",
+                        "description": "Specify if you want to apply the permissions to a permission template. Changing this forces a new resource to be\ncreated. Cannot be used with `project_key \u0026 template_name`\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "templateName": {
+                        "type": "string",
+                        "description": "Specify if you want to apply the permissions to a permission template. Changing this forces a new resource to be\ncreated. Cannot be used with `project_key \u0026 template_id`\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "sonarqube:index/plugin:Plugin": {
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "description": "The key identifying the plugin to uninstall.\n"
+                }
+            },
+            "required": [
+                "key"
+            ],
+            "inputProperties": {
+                "key": {
+                    "type": "string",
+                    "description": "The key identifying the plugin to uninstall.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "key"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Plugin resources.\n",
+                "properties": {
+                    "key": {
+                        "type": "string",
+                        "description": "The key identifying the plugin to uninstall.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "sonarqube:index/portfolio:Portfolio": {
+            "properties": {
+                "branch": {
+                    "type": "string",
+                    "description": "Which branch to analyze. If nothing, or '' is specified, the main branch is used.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "A description of the Portfolio to create\n"
+                },
+                "key": {
+                    "type": "string",
+                    "description": "The key of the Portfolio to create\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Portfolio to create\n"
+                },
+                "qualifier": {
+                    "type": "string"
+                },
+                "regexp": {
+                    "type": "string",
+                    "description": "A regular expression that is used to match Projects with a matching name OR key. If they match, they are added to the\nPortfolio\n"
+                },
+                "selectedProjects": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/sonarqube:index/PortfolioSelectedProject:PortfolioSelectedProject"
+                    },
+                    "description": "A set of projects to add to the portfolio.\n"
+                },
+                "selectionMode": {
+                    "type": "string",
+                    "description": "How to populate the Portfolio to create. Possible values are `NONE`, `MANUAL`, `TAGS`, `REGEXP` or `REST`. [See\ndocs](https://docs.sonarqube.org/9.8/project-administration/managing-portfolios/#populating-portfolios) for how\nPortfolio population works\n"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of Project tags to populate the Portfolio from. Only active when `selection_mode` is `TAGS`\n"
+                },
+                "visibility": {
+                    "type": "string",
+                    "description": "Whether the created portfolio should be visible to everyone, or only specific user/groups. If no visibility is\nspecified, the default portfolio visibility will be `public`.\n"
+                }
+            },
+            "required": [
+                "description",
+                "key",
+                "name",
+                "qualifier"
+            ],
+            "inputProperties": {
+                "branch": {
+                    "type": "string",
+                    "description": "Which branch to analyze. If nothing, or '' is specified, the main branch is used.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "A description of the Portfolio to create\n"
+                },
+                "key": {
+                    "type": "string",
+                    "description": "The key of the Portfolio to create\n",
+                    "willReplaceOnChanges": true
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Portfolio to create\n"
+                },
+                "regexp": {
+                    "type": "string",
+                    "description": "A regular expression that is used to match Projects with a matching name OR key. If they match, they are added to the\nPortfolio\n"
+                },
+                "selectedProjects": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/sonarqube:index/PortfolioSelectedProject:PortfolioSelectedProject"
+                    },
+                    "description": "A set of projects to add to the portfolio.\n"
+                },
+                "selectionMode": {
+                    "type": "string",
+                    "description": "How to populate the Portfolio to create. Possible values are `NONE`, `MANUAL`, `TAGS`, `REGEXP` or `REST`. [See\ndocs](https://docs.sonarqube.org/9.8/project-administration/managing-portfolios/#populating-portfolios) for how\nPortfolio population works\n"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of Project tags to populate the Portfolio from. Only active when `selection_mode` is `TAGS`\n"
+                },
+                "visibility": {
+                    "type": "string",
+                    "description": "Whether the created portfolio should be visible to everyone, or only specific user/groups. If no visibility is\nspecified, the default portfolio visibility will be `public`.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "description",
+                "key"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Portfolio resources.\n",
+                "properties": {
+                    "branch": {
+                        "type": "string",
+                        "description": "Which branch to analyze. If nothing, or '' is specified, the main branch is used.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "A description of the Portfolio to create\n"
+                    },
+                    "key": {
+                        "type": "string",
+                        "description": "The key of the Portfolio to create\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Portfolio to create\n"
+                    },
+                    "qualifier": {
+                        "type": "string"
+                    },
+                    "regexp": {
+                        "type": "string",
+                        "description": "A regular expression that is used to match Projects with a matching name OR key. If they match, they are added to the\nPortfolio\n"
+                    },
+                    "selectedProjects": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/sonarqube:index/PortfolioSelectedProject:PortfolioSelectedProject"
+                        },
+                        "description": "A set of projects to add to the portfolio.\n"
+                    },
+                    "selectionMode": {
+                        "type": "string",
+                        "description": "How to populate the Portfolio to create. Possible values are `NONE`, `MANUAL`, `TAGS`, `REGEXP` or `REST`. [See\ndocs](https://docs.sonarqube.org/9.8/project-administration/managing-portfolios/#populating-portfolios) for how\nPortfolio population works\n"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of Project tags to populate the Portfolio from. Only active when `selection_mode` is `TAGS`\n"
+                    },
+                    "visibility": {
+                        "type": "string",
+                        "description": "Whether the created portfolio should be visible to everyone, or only specific user/groups. If no visibility is\nspecified, the default portfolio visibility will be `public`.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "sonarqube:index/project:Project": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Project to create\n"
+                },
+                "project": {
+                    "type": "string",
+                    "description": "Key of the project. Maximum length 400. All letters, digits, dash, underscore, period or colon.\n"
+                },
+                "settings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/sonarqube:index/ProjectSetting:ProjectSetting"
+                    },
+                    "description": "A list of settings associated to the project\n"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of tags to put on the project.\n"
+                },
+                "visibility": {
+                    "type": "string",
+                    "description": "Whether the created project should be visible to everyone, or only specific user/groups. If no visibility is specified,\nthe default project visibility of the organization will be used. Valid values are `public` and `private`.\n"
+                }
+            },
+            "required": [
+                "name",
+                "project"
+            ],
+            "inputProperties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Project to create\n",
+                    "willReplaceOnChanges": true
+                },
+                "project": {
+                    "type": "string",
+                    "description": "Key of the project. Maximum length 400. All letters, digits, dash, underscore, period or colon.\n"
+                },
+                "settings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/sonarqube:index/ProjectSetting:ProjectSetting"
+                    },
+                    "description": "A list of settings associated to the project\n"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of tags to put on the project.\n"
+                },
+                "visibility": {
+                    "type": "string",
+                    "description": "Whether the created project should be visible to everyone, or only specific user/groups. If no visibility is specified,\nthe default project visibility of the organization will be used. Valid values are `public` and `private`.\n"
+                }
+            },
+            "requiredInputs": [
+                "project"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Project resources.\n",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Project to create\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "project": {
+                        "type": "string",
+                        "description": "Key of the project. Maximum length 400. All letters, digits, dash, underscore, period or colon.\n"
+                    },
+                    "settings": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/sonarqube:index/ProjectSetting:ProjectSetting"
+                        },
+                        "description": "A list of settings associated to the project\n"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of tags to put on the project.\n"
+                    },
+                    "visibility": {
+                        "type": "string",
+                        "description": "Whether the created project should be visible to everyone, or only specific user/groups. If no visibility is specified,\nthe default project visibility of the organization will be used. Valid values are `public` and `private`.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "sonarqube:index/projectMainBranch:ProjectMainBranch": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name you want the main branch to have.\n"
+                },
+                "project": {
+                    "type": "string",
+                    "description": "Key of the project. Maximum length 400. All letters, digits, dash, underscore, period or colon.\n"
+                }
+            },
+            "required": [
+                "name",
+                "project"
+            ],
+            "inputProperties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name you want the main branch to have.\n",
+                    "willReplaceOnChanges": true
+                },
+                "project": {
+                    "type": "string",
+                    "description": "Key of the project. Maximum length 400. All letters, digits, dash, underscore, period or colon.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "project"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ProjectMainBranch resources.\n",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name you want the main branch to have.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "project": {
+                        "type": "string",
+                        "description": "Key of the project. Maximum length 400. All letters, digits, dash, underscore, period or colon.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "sonarqube:index/qualitygate:Qualitygate": {
+            "properties": {
+                "conditions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/sonarqube:index/QualitygateCondition:QualitygateCondition"
+                    },
+                    "description": "A list of conditions that the gate uses.\n"
+                },
+                "copyFrom": {
+                    "type": "string",
+                    "description": "Name of an existing Quality Gate to copy from.\n"
+                },
+                "isDefault": {
+                    "type": "boolean",
+                    "description": "When set to true this Quality Gate is set as default.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Quality Gate to create. Maximum length 100.\n"
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "inputProperties": {
+                "conditions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/sonarqube:index/QualitygateCondition:QualitygateCondition"
+                    },
+                    "description": "A list of conditions that the gate uses.\n"
+                },
+                "copyFrom": {
+                    "type": "string",
+                    "description": "Name of an existing Quality Gate to copy from.\n",
+                    "willReplaceOnChanges": true
+                },
+                "isDefault": {
+                    "type": "boolean",
+                    "description": "When set to true this Quality Gate is set as default.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Quality Gate to create. Maximum length 100.\n"
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Qualitygate resources.\n",
+                "properties": {
+                    "conditions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/sonarqube:index/QualitygateCondition:QualitygateCondition"
+                        },
+                        "description": "A list of conditions that the gate uses.\n"
+                    },
+                    "copyFrom": {
+                        "type": "string",
+                        "description": "Name of an existing Quality Gate to copy from.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "isDefault": {
+                        "type": "boolean",
+                        "description": "When set to true this Quality Gate is set as default.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Quality Gate to create. Maximum length 100.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "sonarqube:index/qualitygateProjectAssociation:QualitygateProjectAssociation": {
+            "properties": {
+                "gateid": {
+                    "type": "string"
+                },
+                "gatename": {
+                    "type": "string",
+                    "description": "The name of the Quality Gate\n"
+                },
+                "projectkey": {
+                    "type": "string",
+                    "description": "Key of the project. Maximum length 400. All letters, digits, dash, underscore, period or colon.\n"
+                }
+            },
+            "required": [
+                "projectkey"
+            ],
+            "inputProperties": {
+                "gateid": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "gatename": {
+                    "type": "string",
+                    "description": "The name of the Quality Gate\n",
+                    "willReplaceOnChanges": true
+                },
+                "projectkey": {
+                    "type": "string",
+                    "description": "Key of the project. Maximum length 400. All letters, digits, dash, underscore, period or colon.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "projectkey"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering QualitygateProjectAssociation resources.\n",
+                "properties": {
+                    "gateid": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "gatename": {
+                        "type": "string",
+                        "description": "The name of the Quality Gate\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "projectkey": {
+                        "type": "string",
+                        "description": "Key of the project. Maximum length 400. All letters, digits, dash, underscore, period or colon.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "sonarqube:index/qualitygateUsergroupAssociation:QualitygateUsergroupAssociation": {
+            "properties": {
+                "gatename": {
+                    "type": "string",
+                    "description": "The name of the Quality Gate\n"
+                },
+                "groupName": {
+                    "type": "string",
+                    "description": "The name of the Group to associate. Either `group_name` or `login_name` should be provided.\n"
+                },
+                "loginName": {
+                    "type": "string",
+                    "description": "The name of the User to associate. Either `group_name` or `login_name` should be provided.\n"
+                }
+            },
+            "required": [
+                "gatename"
+            ],
+            "inputProperties": {
+                "gatename": {
+                    "type": "string",
+                    "description": "The name of the Quality Gate\n",
+                    "willReplaceOnChanges": true
+                },
+                "groupName": {
+                    "type": "string",
+                    "description": "The name of the Group to associate. Either `group_name` or `login_name` should be provided.\n",
+                    "willReplaceOnChanges": true
+                },
+                "loginName": {
+                    "type": "string",
+                    "description": "The name of the User to associate. Either `group_name` or `login_name` should be provided.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "gatename"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering QualitygateUsergroupAssociation resources.\n",
+                "properties": {
+                    "gatename": {
+                        "type": "string",
+                        "description": "The name of the Quality Gate\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "groupName": {
+                        "type": "string",
+                        "description": "The name of the Group to associate. Either `group_name` or `login_name` should be provided.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "loginName": {
+                        "type": "string",
+                        "description": "The name of the User to associate. Either `group_name` or `login_name` should be provided.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "sonarqube:index/qualityprofile:Qualityprofile": {
+            "properties": {
+                "isDefault": {
+                    "type": "boolean",
+                    "description": "When set to true this will make the added Quality Profile default\n"
+                },
+                "key": {
+                    "type": "string",
+                    "description": "ID of the Sonarqube Quality Profile\n"
+                },
+                "language": {
+                    "type": "string",
+                    "description": "Quality profile language. Must be one of \"cs\", \"css\", \"flex\", \"go\", \"java\", \"js\", \"jsp\", \"kotlin\", \"php\", \"py\", \"ruby\",\n\"scala\", \"ts\", \"vbnet\", \"web\", \"xml\"\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Quality Profile to create. Maximum length 100\n"
+                },
+                "parent": {
+                    "type": "string",
+                    "description": "When a parent is provided the quality profile will inherit it's rules\n"
+                }
+            },
+            "required": [
+                "key",
+                "language",
+                "name"
+            ],
+            "inputProperties": {
+                "isDefault": {
+                    "type": "boolean",
+                    "description": "When set to true this will make the added Quality Profile default\n",
+                    "willReplaceOnChanges": true
+                },
+                "language": {
+                    "type": "string",
+                    "description": "Quality profile language. Must be one of \"cs\", \"css\", \"flex\", \"go\", \"java\", \"js\", \"jsp\", \"kotlin\", \"php\", \"py\", \"ruby\",\n\"scala\", \"ts\", \"vbnet\", \"web\", \"xml\"\n",
+                    "willReplaceOnChanges": true
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Quality Profile to create. Maximum length 100\n",
+                    "willReplaceOnChanges": true
+                },
+                "parent": {
+                    "type": "string",
+                    "description": "When a parent is provided the quality profile will inherit it's rules\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "language"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Qualityprofile resources.\n",
+                "properties": {
+                    "isDefault": {
+                        "type": "boolean",
+                        "description": "When set to true this will make the added Quality Profile default\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "key": {
+                        "type": "string",
+                        "description": "ID of the Sonarqube Quality Profile\n"
+                    },
+                    "language": {
+                        "type": "string",
+                        "description": "Quality profile language. Must be one of \"cs\", \"css\", \"flex\", \"go\", \"java\", \"js\", \"jsp\", \"kotlin\", \"php\", \"py\", \"ruby\",\n\"scala\", \"ts\", \"vbnet\", \"web\", \"xml\"\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Quality Profile to create. Maximum length 100\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "parent": {
+                        "type": "string",
+                        "description": "When a parent is provided the quality profile will inherit it's rules\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "sonarqube:index/qualityprofileActivateRule:QualityprofileActivateRule": {
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "description": "Quality Profile key. Can be obtained through api/qualityprofiles/search\n"
+                },
+                "params": {
+                    "type": "string",
+                    "description": "Parameters as semi-colon list of =, for example 'params=key1=v1;key2=v2' (Only for custom rule)\n"
+                },
+                "reset": {
+                    "type": "string",
+                    "description": "Reset severity and parameters of activated rule. Set the values defined on parent profile or from rule default values. -\nPossible values true false yes no (Default false)\n"
+                },
+                "rule": {
+                    "type": "string",
+                    "description": "Rule key\n"
+                },
+                "severity": {
+                    "type": "string",
+                    "description": "Severity. Ignored if parameter reset is true. - Possible values - INFO, MINOR, MAJOR, CRITICAL, BLOCKER\n"
+                }
+            },
+            "required": [
+                "key",
+                "rule"
+            ],
+            "inputProperties": {
+                "key": {
+                    "type": "string",
+                    "description": "Quality Profile key. Can be obtained through api/qualityprofiles/search\n",
+                    "willReplaceOnChanges": true
+                },
+                "params": {
+                    "type": "string",
+                    "description": "Parameters as semi-colon list of =, for example 'params=key1=v1;key2=v2' (Only for custom rule)\n",
+                    "willReplaceOnChanges": true
+                },
+                "reset": {
+                    "type": "string",
+                    "description": "Reset severity and parameters of activated rule. Set the values defined on parent profile or from rule default values. -\nPossible values true false yes no (Default false)\n",
+                    "willReplaceOnChanges": true
+                },
+                "rule": {
+                    "type": "string",
+                    "description": "Rule key\n",
+                    "willReplaceOnChanges": true
+                },
+                "severity": {
+                    "type": "string",
+                    "description": "Severity. Ignored if parameter reset is true. - Possible values - INFO, MINOR, MAJOR, CRITICAL, BLOCKER\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "key",
+                "rule"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering QualityprofileActivateRule resources.\n",
+                "properties": {
+                    "key": {
+                        "type": "string",
+                        "description": "Quality Profile key. Can be obtained through api/qualityprofiles/search\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "params": {
+                        "type": "string",
+                        "description": "Parameters as semi-colon list of =, for example 'params=key1=v1;key2=v2' (Only for custom rule)\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "reset": {
+                        "type": "string",
+                        "description": "Reset severity and parameters of activated rule. Set the values defined on parent profile or from rule default values. -\nPossible values true false yes no (Default false)\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "rule": {
+                        "type": "string",
+                        "description": "Rule key\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "severity": {
+                        "type": "string",
+                        "description": "Severity. Ignored if parameter reset is true. - Possible values - INFO, MINOR, MAJOR, CRITICAL, BLOCKER\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "sonarqube:index/qualityprofileProjectAssociation:QualityprofileProjectAssociation": {
+            "properties": {
+                "language": {
+                    "type": "string",
+                    "description": "Quality profile language. Must be a langauge in this list\nhttps://next.sonarqube.com/sonarqube/web_api/api/languages/list\n"
+                },
+                "project": {
+                    "type": "string",
+                    "description": "Name of the project\n"
+                },
+                "qualityProfile": {
+                    "type": "string",
+                    "description": "Name of the Quality Profile\n"
+                }
+            },
+            "required": [
+                "language",
+                "project",
+                "qualityProfile"
+            ],
+            "inputProperties": {
+                "language": {
+                    "type": "string",
+                    "description": "Quality profile language. Must be a langauge in this list\nhttps://next.sonarqube.com/sonarqube/web_api/api/languages/list\n",
+                    "willReplaceOnChanges": true
+                },
+                "project": {
+                    "type": "string",
+                    "description": "Name of the project\n",
+                    "willReplaceOnChanges": true
+                },
+                "qualityProfile": {
+                    "type": "string",
+                    "description": "Name of the Quality Profile\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "language",
+                "project",
+                "qualityProfile"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering QualityprofileProjectAssociation resources.\n",
+                "properties": {
+                    "language": {
+                        "type": "string",
+                        "description": "Quality profile language. Must be a langauge in this list\nhttps://next.sonarqube.com/sonarqube/web_api/api/languages/list\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "project": {
+                        "type": "string",
+                        "description": "Name of the project\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "qualityProfile": {
+                        "type": "string",
+                        "description": "Name of the Quality Profile\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "sonarqube:index/rule:Rule": {
+            "properties": {
+                "customKey": {
+                    "type": "string",
+                    "description": "key of the custom rule should only contain : a-z, 0-9, \\_\n"
+                },
+                "markdownDescription": {
+                    "type": "string",
+                    "description": "Rule description\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Rule name\n"
+                },
+                "params": {
+                    "type": "string",
+                    "description": "Parameters as semi-colon list of =, for example 'params=key1=v1;key2=v2' (Only for custom rule) - parameter order:\nexpression=value;filePattern=value;message=value\n"
+                },
+                "preventReactivation": {
+                    "type": "string",
+                    "description": "If set to true and if the rule has been deactivated (status 'REMOVED'), a status 409 will be returned - Possible values\n- true, false, yes, no\n"
+                },
+                "severity": {
+                    "type": "string",
+                    "description": "Rule severity - Possible values - INFO, MINOR, MAJOR, CRITICAL, BLOCKER\n"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Rule status - Possible values - BETA, DEPRECATED, READY, REMOVED - Default value - READY\n"
+                },
+                "templateKey": {
+                    "type": "string",
+                    "description": "Key of the template rule in order to create a custom rule (mandatory for custom rule) - [Example\nvalues](https://docs.sonarqube.org/latest/user-guide/rules/#header-4)\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Rule type - Possible values - CODE_SMELL, BUG, VULNERABILITY, SECURITY_HOTSPOT\n"
+                }
+            },
+            "required": [
+                "customKey",
+                "markdownDescription",
+                "name",
+                "templateKey"
+            ],
+            "inputProperties": {
+                "customKey": {
+                    "type": "string",
+                    "description": "key of the custom rule should only contain : a-z, 0-9, \\_\n",
+                    "willReplaceOnChanges": true
+                },
+                "markdownDescription": {
+                    "type": "string",
+                    "description": "Rule description\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Rule name\n",
+                    "willReplaceOnChanges": true
+                },
+                "params": {
+                    "type": "string",
+                    "description": "Parameters as semi-colon list of =, for example 'params=key1=v1;key2=v2' (Only for custom rule) - parameter order:\nexpression=value;filePattern=value;message=value\n"
+                },
+                "preventReactivation": {
+                    "type": "string",
+                    "description": "If set to true and if the rule has been deactivated (status 'REMOVED'), a status 409 will be returned - Possible values\n- true, false, yes, no\n"
+                },
+                "severity": {
+                    "type": "string",
+                    "description": "Rule severity - Possible values - INFO, MINOR, MAJOR, CRITICAL, BLOCKER\n"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Rule status - Possible values - BETA, DEPRECATED, READY, REMOVED - Default value - READY\n"
+                },
+                "templateKey": {
+                    "type": "string",
+                    "description": "Key of the template rule in order to create a custom rule (mandatory for custom rule) - [Example\nvalues](https://docs.sonarqube.org/latest/user-guide/rules/#header-4)\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Rule type - Possible values - CODE_SMELL, BUG, VULNERABILITY, SECURITY_HOTSPOT\n"
+                }
+            },
+            "requiredInputs": [
+                "customKey",
+                "markdownDescription",
+                "templateKey"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Rule resources.\n",
+                "properties": {
+                    "customKey": {
+                        "type": "string",
+                        "description": "key of the custom rule should only contain : a-z, 0-9, \\_\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "markdownDescription": {
+                        "type": "string",
+                        "description": "Rule description\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Rule name\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "params": {
+                        "type": "string",
+                        "description": "Parameters as semi-colon list of =, for example 'params=key1=v1;key2=v2' (Only for custom rule) - parameter order:\nexpression=value;filePattern=value;message=value\n"
+                    },
+                    "preventReactivation": {
+                        "type": "string",
+                        "description": "If set to true and if the rule has been deactivated (status 'REMOVED'), a status 409 will be returned - Possible values\n- true, false, yes, no\n"
+                    },
+                    "severity": {
+                        "type": "string",
+                        "description": "Rule severity - Possible values - INFO, MINOR, MAJOR, CRITICAL, BLOCKER\n"
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Rule status - Possible values - BETA, DEPRECATED, READY, REMOVED - Default value - READY\n"
+                    },
+                    "templateKey": {
+                        "type": "string",
+                        "description": "Key of the template rule in order to create a custom rule (mandatory for custom rule) - [Example\nvalues](https://docs.sonarqube.org/latest/user-guide/rules/#header-4)\n"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Rule type - Possible values - CODE_SMELL, BUG, VULNERABILITY, SECURITY_HOTSPOT\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "sonarqube:index/setting:Setting": {
+            "properties": {
+                "fieldValues": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    },
+                    "description": "Setting field values for the supplied key\n"
+                },
+                "key": {
+                    "type": "string",
+                    "description": "Setting key\n"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "Setting value. To reset a value, please use the reset web service.\n"
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Setting multi values for the supplied key\n"
+                }
+            },
+            "required": [
+                "key"
+            ],
+            "inputProperties": {
+                "fieldValues": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    },
+                    "description": "Setting field values for the supplied key\n"
+                },
+                "key": {
+                    "type": "string",
+                    "description": "Setting key\n"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "Setting value. To reset a value, please use the reset web service.\n"
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Setting multi values for the supplied key\n"
+                }
+            },
+            "requiredInputs": [
+                "key"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Setting resources.\n",
+                "properties": {
+                    "fieldValues": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Setting field values for the supplied key\n"
+                    },
+                    "key": {
+                        "type": "string",
+                        "description": "Setting key\n"
+                    },
+                    "value": {
+                        "type": "string",
+                        "description": "Setting value. To reset a value, please use the reset web service.\n"
+                    },
+                    "values": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Setting multi values for the supplied key\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "sonarqube:index/user:User": {
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "description": "The email of the User to create.\n"
+                },
+                "isLocal": {
+                    "type": "boolean",
+                    "description": "`True` if the User should be of type `local`. Defaults to `true`.\n"
+                },
+                "loginName": {
+                    "type": "string",
+                    "description": "The login name of the User to create. Changing this forces a new resource to be created.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the User to create. Changing this forces a new resource to be created.\n"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "The password of User to create. This is only used if the user is of type `local`.\n",
+                    "secret": true
+                }
+            },
+            "required": [
+                "loginName",
+                "name"
+            ],
+            "inputProperties": {
+                "email": {
+                    "type": "string",
+                    "description": "The email of the User to create.\n"
+                },
+                "isLocal": {
+                    "type": "boolean",
+                    "description": "`True` if the User should be of type `local`. Defaults to `true`.\n",
+                    "willReplaceOnChanges": true
+                },
+                "loginName": {
+                    "type": "string",
+                    "description": "The login name of the User to create. Changing this forces a new resource to be created.\n",
+                    "willReplaceOnChanges": true
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the User to create. Changing this forces a new resource to be created.\n",
+                    "willReplaceOnChanges": true
+                },
+                "password": {
+                    "type": "string",
+                    "description": "The password of User to create. This is only used if the user is of type `local`.\n",
+                    "secret": true
+                }
+            },
+            "requiredInputs": [
+                "loginName"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering User resources.\n",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "description": "The email of the User to create.\n"
+                    },
+                    "isLocal": {
+                        "type": "boolean",
+                        "description": "`True` if the User should be of type `local`. Defaults to `true`.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "loginName": {
+                        "type": "string",
+                        "description": "The login name of the User to create. Changing this forces a new resource to be created.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the User to create. Changing this forces a new resource to be created.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "The password of User to create. This is only used if the user is of type `local`.\n",
+                        "secret": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "sonarqube:index/userExternalIdentity:UserExternalIdentity": {
+            "properties": {
+                "externalIdentity": {
+                    "type": "string",
+                    "description": "The identifier of the User used by the Authentication Provider. Changing this forces a new resource to be created.\n"
+                },
+                "externalProvider": {
+                    "type": "string",
+                    "description": "The key of the Authentication Provider. The Authentication Provider must be activated on Sonarqube. Changing this forces\na new resource to be created.\n"
+                },
+                "loginName": {
+                    "type": "string",
+                    "description": "The login name of the User to update. Changing this forces a new resource to be created.\n"
+                }
+            },
+            "required": [
+                "externalIdentity",
+                "externalProvider",
+                "loginName"
+            ],
+            "inputProperties": {
+                "externalIdentity": {
+                    "type": "string",
+                    "description": "The identifier of the User used by the Authentication Provider. Changing this forces a new resource to be created.\n",
+                    "willReplaceOnChanges": true
+                },
+                "externalProvider": {
+                    "type": "string",
+                    "description": "The key of the Authentication Provider. The Authentication Provider must be activated on Sonarqube. Changing this forces\na new resource to be created.\n",
+                    "willReplaceOnChanges": true
+                },
+                "loginName": {
+                    "type": "string",
+                    "description": "The login name of the User to update. Changing this forces a new resource to be created.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "externalIdentity",
+                "externalProvider",
+                "loginName"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering UserExternalIdentity resources.\n",
+                "properties": {
+                    "externalIdentity": {
+                        "type": "string",
+                        "description": "The identifier of the User used by the Authentication Provider. Changing this forces a new resource to be created.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "externalProvider": {
+                        "type": "string",
+                        "description": "The key of the Authentication Provider. The Authentication Provider must be activated on Sonarqube. Changing this forces\na new resource to be created.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "loginName": {
+                        "type": "string",
+                        "description": "The login name of the User to update. Changing this forces a new resource to be created.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "sonarqube:index/userToken:UserToken": {
+            "properties": {
+                "expirationDate": {
+                    "type": "string",
+                    "description": "The expiration date of the token being generated, in ISO 8601 format (YYYY-MM-DD). If not set, default to no expiration.\n"
+                },
+                "loginName": {
+                    "type": "string",
+                    "description": "The login name of the User for which the token should be created. If not set, the token is created for the authenticated\nuser. Changing this forces a new resource to be created.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Token to create. Changing this forces a new resource to be created.\n"
+                },
+                "projectKey": {
+                    "type": "string",
+                    "description": "The key of the only project that can be analyzed by the PROJECT_ANALYSIS TOKEN being created. Changing this forces a new\nresource to be created.\n"
+                },
+                "token": {
+                    "type": "string",
+                    "description": "The token value.\n",
+                    "secret": true
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The kind of Token to create. Changing this forces a new resource to be created. Possible values are USER_TOKEN,\nGLOBAL_ANALYSIS_TOKEN, or PROJECT_ANALYSIS_TOKEN. Defaults to USER_TOKEN. If set to PROJECT_ANALYSIS_TOKEN, then the\nproject_key must also be specified.\n"
+                }
+            },
+            "required": [
+                "expirationDate",
+                "name",
+                "token"
+            ],
+            "inputProperties": {
+                "expirationDate": {
+                    "type": "string",
+                    "description": "The expiration date of the token being generated, in ISO 8601 format (YYYY-MM-DD). If not set, default to no expiration.\n",
+                    "willReplaceOnChanges": true
+                },
+                "loginName": {
+                    "type": "string",
+                    "description": "The login name of the User for which the token should be created. If not set, the token is created for the authenticated\nuser. Changing this forces a new resource to be created.\n",
+                    "willReplaceOnChanges": true
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Token to create. Changing this forces a new resource to be created.\n",
+                    "willReplaceOnChanges": true
+                },
+                "projectKey": {
+                    "type": "string",
+                    "description": "The key of the only project that can be analyzed by the PROJECT_ANALYSIS TOKEN being created. Changing this forces a new\nresource to be created.\n",
+                    "willReplaceOnChanges": true
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The kind of Token to create. Changing this forces a new resource to be created. Possible values are USER_TOKEN,\nGLOBAL_ANALYSIS_TOKEN, or PROJECT_ANALYSIS_TOKEN. Defaults to USER_TOKEN. If set to PROJECT_ANALYSIS_TOKEN, then the\nproject_key must also be specified.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering UserToken resources.\n",
+                "properties": {
+                    "expirationDate": {
+                        "type": "string",
+                        "description": "The expiration date of the token being generated, in ISO 8601 format (YYYY-MM-DD). If not set, default to no expiration.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "loginName": {
+                        "type": "string",
+                        "description": "The login name of the User for which the token should be created. If not set, the token is created for the authenticated\nuser. Changing this forces a new resource to be created.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Token to create. Changing this forces a new resource to be created.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "projectKey": {
+                        "type": "string",
+                        "description": "The key of the only project that can be analyzed by the PROJECT_ANALYSIS TOKEN being created. Changing this forces a new\nresource to be created.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "token": {
+                        "type": "string",
+                        "description": "The token value.\n",
+                        "secret": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "The kind of Token to create. Changing this forces a new resource to be created. Possible values are USER_TOKEN,\nGLOBAL_ANALYSIS_TOKEN, or PROJECT_ANALYSIS_TOKEN. Defaults to USER_TOKEN. If set to PROJECT_ANALYSIS_TOKEN, then the\nproject_key must also be specified.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "sonarqube:index/webhook:Webhook": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the webhook to create. This will be displayed in the Sonarqube administration console.\n"
+                },
+                "project": {
+                    "type": "string",
+                    "description": "The key of the project that will own the webhook.\n"
+                },
+                "secret": {
+                    "type": "string",
+                    "description": "The secret to send with the event payload.\n",
+                    "secret": true
+                },
+                "url": {
+                    "type": "string",
+                    "description": "The URL to send event payloads to. This must begin with either `https://` or `http://`.\n"
+                }
+            },
+            "required": [
+                "name",
+                "secret",
+                "url"
+            ],
+            "inputProperties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the webhook to create. This will be displayed in the Sonarqube administration console.\n"
+                },
+                "project": {
+                    "type": "string",
+                    "description": "The key of the project that will own the webhook.\n",
+                    "willReplaceOnChanges": true
+                },
+                "secret": {
+                    "type": "string",
+                    "description": "The secret to send with the event payload.\n",
+                    "secret": true
+                },
+                "url": {
+                    "type": "string",
+                    "description": "The URL to send event payloads to. This must begin with either `https://` or `http://`.\n"
+                }
+            },
+            "requiredInputs": [
+                "url"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Webhook resources.\n",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the webhook to create. This will be displayed in the Sonarqube administration console.\n"
+                    },
+                    "project": {
+                        "type": "string",
+                        "description": "The key of the project that will own the webhook.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "secret": {
+                        "type": "string",
+                        "description": "The secret to send with the event payload.\n",
+                        "secret": true
+                    },
+                    "url": {
+                        "type": "string",
+                        "description": "The URL to send event payloads to. This must begin with either `https://` or `http://`.\n"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "functions": {
+        "sonarqube:index/getGroup:getGroup": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getGroup.\n",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getGroup.\n",
+                "properties": {
+                    "description": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "description",
+                    "name",
+                    "id"
+                ]
+            }
+        },
+        "sonarqube:index/getPortfolio:getPortfolio": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getPortfolio.\n",
+                "properties": {
+                    "key": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "key"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getPortfolio.\n",
+                "properties": {
+                    "branch": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "key": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "qualifier": {
+                        "type": "string"
+                    },
+                    "regexp": {
+                        "type": "string"
+                    },
+                    "selectionMode": {
+                        "type": "string"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "visibility": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "branch",
+                    "description",
+                    "key",
+                    "name",
+                    "qualifier",
+                    "regexp",
+                    "selectionMode",
+                    "tags",
+                    "visibility",
+                    "id"
+                ]
+            }
+        },
+        "sonarqube:index/getProject:getProject": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getProject.\n",
+                "properties": {
+                    "project": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "project"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getProject.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "project": {
+                        "type": "string"
+                    },
+                    "visibility": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "project",
+                    "visibility",
+                    "id"
+                ]
+            }
+        },
+        "sonarqube:index/getQualitygate:getQualitygate": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getQualitygate.\n",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getQualitygate.\n",
+                "properties": {
+                    "conditions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/sonarqube:index/getQualitygateCondition:getQualitygateCondition"
+                        }
+                    },
+                    "copyFrom": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "isDefault": {
+                        "type": "boolean"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "conditions",
+                    "copyFrom",
+                    "isDefault",
+                    "name",
+                    "id"
+                ]
+            }
+        },
+        "sonarqube:index/getQualityprofile:getQualityprofile": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getQualityprofile.\n",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getQualityprofile.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "isDefault": {
+                        "type": "boolean"
+                    },
+                    "key": {
+                        "type": "string"
+                    },
+                    "language": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "isDefault",
+                    "key",
+                    "language",
+                    "name",
+                    "id"
+                ]
+            }
+        },
+        "sonarqube:index/getRule:getRule": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getRule.\n",
+                "properties": {
+                    "key": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "key"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getRule.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "key": {
+                        "type": "string"
+                    },
+                    "markdownDescription": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "severity": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "templateKey": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "key",
+                    "markdownDescription",
+                    "name",
+                    "severity",
+                    "status",
+                    "templateKey",
+                    "type",
+                    "id"
+                ]
+            }
+        },
+        "sonarqube:index/getUser:getUser": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getUser.\n",
+                "properties": {
+                    "loginName": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "loginName"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getUser.\n",
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "isLocal": {
+                        "type": "boolean"
+                    },
+                    "loginName": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "email",
+                    "isLocal",
+                    "loginName",
+                    "name",
+                    "id"
+                ]
+            }
+        }
+    }
+}

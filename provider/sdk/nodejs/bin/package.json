@@ -1,0 +1,9 @@
+{
+  "name": "@covalto/pulumi-sonarqube",
+  "version": "1.0.0",
+  "main": "bin/index.js",
+  "types": "bin/index.d.ts",
+  "dependencies": {
+    "@pulumi/pulumi": "^3.0.0"
+  }
+}

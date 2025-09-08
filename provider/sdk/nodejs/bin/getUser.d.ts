@@ -1,0 +1,74 @@
+import * as pulumi from "@pulumi/pulumi";
+/**
+ * Use this data source to get a Sonarqube User resource
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sonarqube from "@pulumi/sonarqube";
+ *
+ * const user = sonarqube.getUser({
+ *     loginName: "terraform-test",
+ * });
+ * ```
+ */
+export declare function getUser(args: GetUserArgs, opts?: pulumi.InvokeOptions): Promise<GetUserResult>;
+/**
+ * A collection of arguments for invoking getUser.
+ */
+export interface GetUserArgs {
+    /**
+     * The login name of the user
+     */
+    loginName: string;
+}
+/**
+ * A collection of values returned by getUser.
+ */
+export interface GetUserResult {
+    /**
+     * The email of the user
+     */
+    readonly email: string;
+    /**
+     * The provider-assigned unique ID for this managed resource.
+     */
+    readonly id: string;
+    /**
+     * Whether the user is local
+     */
+    readonly isLocal: boolean;
+    /**
+     * The login name of the user
+     */
+    readonly loginName: string;
+    /**
+     * The name of the user
+     */
+    readonly name: string;
+}
+/**
+ * Use this data source to get a Sonarqube User resource
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sonarqube from "@pulumi/sonarqube";
+ *
+ * const user = sonarqube.getUser({
+ *     loginName: "terraform-test",
+ * });
+ * ```
+ */
+export declare function getUserOutput(args: GetUserOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetUserResult>;
+/**
+ * A collection of arguments for invoking getUser.
+ */
+export interface GetUserOutputArgs {
+    /**
+     * The login name of the user
+     */
+    loginName: pulumi.Input<string>;
+}
